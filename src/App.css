@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+h1{
+  text-align: center;
+  background-color: #456268;
+  color: rgb(255, 255, 255);
+  padding: 30px;
+}
+
+.mb-3 {
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+form {
+  margin-top: 150px;
+  width: 30%;
+  text-align: center;
+  font-size: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+* {
+  background-color: #045762;
+  color: white;
+}

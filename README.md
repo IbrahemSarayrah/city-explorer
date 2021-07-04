@@ -1,31 +1,33 @@
 # City Explorer
 
 **Author**: Ibrahem Sarayrah
+
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+
+to view location latitude and longitude and the map of the city to explore
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
+technologies use do design this app : React , Bootstrap ,
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+Application now has a fully-functional to view latitude and longitude and the map of the city
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-* Name of feature:
+locationIQ for the data in this app
 
-* Estimate of time needed to complete:
+* Name of feature: city-explorer
 
-* Start time:
+* Estimate of time needed to complete: 2
 
-* Finish time:
+* Start time: 3
 
-* Actual time needed to complete:
+* Finish time: 6
+
+* Actual time needed to complete: 3
