@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Tabs, Tab, Table } from 'react-bootstrap'
 import axios from 'axios';
+import Weather from './ components/Weather';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -11,7 +12,8 @@ export class App extends Component {
     this.state = {
       locationData: {},
       targetData: '',
-      showTab: false
+      showTab: false,
+      weatherData: {}
     }
   }
 
@@ -24,9 +26,12 @@ export class App extends Component {
     let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_ACCESS_TOKEN}&q=${this.state.targetData}&format=json`
 
     let resData = await axios.get(url);
+    // console.log(resData.data);
+    let weatherData = await axios.get(`${process.env.REACT_APP_API}/weather?cityName=${this.state.targetData.toLocaleLowerCase()}`)
 
     this.setState({
       locationData: resData.data[0],
+      weatherData:weatherData.data,
       showTab: true
     })
   }
@@ -67,6 +72,9 @@ export class App extends Component {
                   </tr>
                 </tbody>
               </Table>
+            </Tab>
+            <Tab eventKey="Weather" title="Weather">
+              <Weather weatherData = {this.state.weatherData}/>
             </Tab>
             <Tab eventKey="profile" title="Map">
               <img
