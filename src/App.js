@@ -13,27 +13,36 @@ export class App extends Component {
       locationData: {},
       targetData: '',
       showTab: false,
+      showError: false,
       weatherData: {}
     }
   }
 
   submitLocation = async (e) => {
     e.preventDefault();
-    await this.setState({
-      targetData: e.target.cityName.value
-    })
+    try {
+      await this.setState({
+        targetData: e.target.cityName.value
+      })
 
-    let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_ACCESS_TOKEN}&q=${this.state.targetData}&format=json`
+      let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_ACCESS_TOKEN}&q=${this.state.targetData}&format=json`
 
-    let resData = await axios.get(url);
-    // console.log(resData.data);
-    let weatherData = await axios.get(`${process.env.REACT_APP_API}/weather?cityName=${this.state.targetData.toLocaleLowerCase()}`)
+      let resData = await axios.get(url);
+      // console.log(resData.data);
+      let weatherData = await axios.get(`${process.env.REACT_APP_API}/weather?cityName=${this.state.targetData.toLocaleLowerCase()}`)
 
-    this.setState({
-      locationData: resData.data[0],
-      weatherData:weatherData.data,
-      showTab: true
-    })
+      this.setState({
+        locationData: resData.data[0],
+        weatherData: weatherData.data,
+        showTab: true,
+        showError: false
+      })
+    } catch (err) {
+      this.setState({
+        showError: true,
+        showTab: false
+      })
+    }
   }
 
   render() {
@@ -46,7 +55,7 @@ export class App extends Component {
 
         <Form onSubmit={this.submitLocation} value='get data'>
           <Form.Group className="mb-3" >
-            <Form.Control type="text" placeholder="Explore Your City" name='cityName' style = {{textAlign:'center'}} />
+            <Form.Control type="text" placeholder="Explore Your City" name='cityName' style={{ textAlign: 'center' }} />
           </Form.Group>
           <Button variant="primary" type="submit" >
             Explore
@@ -74,7 +83,7 @@ export class App extends Component {
               </Table>
             </Tab>
             <Tab eventKey="Weather" title="Weather">
-              <Weather weatherData = {this.state.weatherData}/>
+              <Weather weatherData={this.state.weatherData} />
             </Tab>
             <Tab eventKey="profile" title="Map">
               <img
@@ -83,6 +92,10 @@ export class App extends Component {
               />
             </Tab>
           </Tabs>
+        }
+
+        {this.state.showError &&
+          <p style={{ fontSize: '50px', textAlign: 'center', marginTop: '30px' }}>Internal Server Error 500 <br /> Enter a Valid City Name</p>
         }
 
       </>
