@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form, Button, Tabs, Tab, Table } from 'react-bootstrap'
 import axios from 'axios';
 import Weather from './ components/Weather';
+import Movie from './ components/Movie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -14,7 +15,8 @@ export class App extends Component {
       targetData: '',
       showTab: false,
       showError: false,
-      weatherData: {}
+      weatherData: {},
+      movieData: {}
     }
   }
 
@@ -30,10 +32,12 @@ export class App extends Component {
       let resData = await axios.get(url);
       // console.log(resData.data);
       let weatherData = await axios.get(`${process.env.REACT_APP_API}/weather?cityName=${this.state.targetData.toLocaleLowerCase()}`)
+      let movieData = await axios.get(`${process.env.REACT_APP_API}/movie?movieName=${this.state.targetData.toLocaleLowerCase()}`)
 
       this.setState({
         locationData: resData.data[0],
         weatherData: weatherData.data,
+        movieData: movieData.data,
         showTab: true,
         showError: false
       })
@@ -90,6 +94,9 @@ export class App extends Component {
                 alt=''
                 src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_ACCESS_TOKEN}&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=13`}
               />
+            </Tab>
+            <Tab eventKey="Movie" title="Movie">
+              <Movie movieData={this.state.movieData} />
             </Tab>
           </Tabs>
         }
