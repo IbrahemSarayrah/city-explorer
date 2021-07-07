@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Form, Button, Tabs, Tab, Table } from 'react-bootstrap'
-import axios from 'axios';
 import Weather from './ components/Weather';
 import Movie from './ components/Movie';
+import Header from './ components/Header';
+import Footer from './ components/Footer';
+import { Form, Button, Tabs, Tab, Table } from 'react-bootstrap'
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -54,8 +56,7 @@ export class App extends Component {
     return (
 
       <>
-
-        <h1> City Explorer </h1>
+         <Header/>
 
         <Form onSubmit={this.submitLocation} value='get data'>
           <Form.Group className="mb-3" >
@@ -104,6 +105,8 @@ export class App extends Component {
         {this.state.showError &&
           <p style={{ fontSize: '50px', textAlign: 'center', marginTop: '30px' }}>Internal Server Error 500 <br /> Enter a Valid City Name</p>
         }
+
+        <Footer/>
 
       </>
     )
