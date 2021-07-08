@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Weather from './ components/Weather';
 import Movies from './ components/Movie';
+import Restaurants from './ components/Restaurants';
 import Header from './ components/Header';
 import Footer from './ components/Footer';
 import { Form, Button, Tabs, Tab, Table } from 'react-bootstrap'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
 
 export class App extends Component {
 
@@ -18,7 +20,8 @@ export class App extends Component {
       showTab: false,
       showError: false,
       weatherData: {},
-      movieData: {}
+      movieData: {},
+      restaurantsData: {}
     }
   }
 
@@ -35,11 +38,21 @@ export class App extends Component {
       // console.log(resData.data);
       let weatherData = await axios.get(`${process.env.REACT_APP_API}/weather?cityName=${this.state.targetData.toLocaleLowerCase()}`)
       let movieData = await axios.get(`${process.env.REACT_APP_API}/movie?movieName=${this.state.targetData.toLocaleLowerCase()}`)
-
+      try {
+      let restaurantsData = await axios.get(`${process.env.REACT_APP_API}/restaurants?restaurantsName=${this.state.targetData}`)
+      this.setState({
+        restaurantsData:restaurantsData.data,
+      })
+      }catch{
+        this.setState({
+          restaurantsData:[]
+        })
+      }
       this.setState({
         locationData: resData.data[0],
         weatherData: weatherData.data,
         movieData: movieData.data,
+
         showTab: true,
         showError: false
       })
@@ -49,6 +62,10 @@ export class App extends Component {
         showTab: false
       })
     }
+  }
+
+  handleRes = async ()=>{
+
   }
 
   render() {
@@ -98,6 +115,10 @@ export class App extends Component {
             </Tab>
             <Tab eventKey="Movie" title="Movie">
               <Movies movieData={this.state.movieData} />
+            </Tab>
+
+            <Tab eventKey="Restaurant" title="Restaurant">
+              <Restaurants restaurantsData={this.state.restaurantsData}/>
             </Tab>
           </Tabs>
         }
