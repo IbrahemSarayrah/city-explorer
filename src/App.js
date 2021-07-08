@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Weather from './ components/Weather';
-import Movie from './ components/Movie';
+import Movies from './ components/Movie';
 import Header from './ components/Header';
 import Footer from './ components/Footer';
 import { Form, Button, Tabs, Tab, Table } from 'react-bootstrap'
@@ -97,7 +97,7 @@ export class App extends Component {
               />
             </Tab>
             <Tab eventKey="Movie" title="Movie">
-              <Movie movieData={this.state.movieData} />
+              <Movies movieData={this.state.movieData} />
             </Tab>
           </Tabs>
         }

@@ -18,8 +18,8 @@ export class Movie extends Component {
                         <th>Release_Date</th>
                     </tr>
                 </thead>
-                {this.props.movieData.map(data => {
-                    return <tbody>
+                {this.props.movieData.map((data, index) => {
+                    return <tbody key={index}>
                         <tr>
                             <td>{data.title}</td>
                             <td>{data.overview}</td>
